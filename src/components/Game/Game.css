@@ -1,9 +1,12 @@
 .gameArea {
   position: relative;
-  margin: auto;
-  width: 20rem;
-  height: 20rem;
+  height: 100%;
+  width: 100%;
   outline: 1px solid var(--secondary-color);
+}
+
+.gameStopped {
+  filter: blur(4px);
 }
 
 .snakeSegment {

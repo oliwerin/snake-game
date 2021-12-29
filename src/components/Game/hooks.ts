@@ -17,7 +17,7 @@ import {
   getUpdatedXHeadCoordinate,
   getUpdatedYHeadCoordinate,
   isGameOver,
-} from "./gameUtils";
+} from "./utils";
 
 let snakeDirection = SNAKE_STARTING_DIRECTION;
 let hasSnakeDirectionChanged = false;
@@ -68,7 +68,11 @@ const useArrowKeys = () => {
   }, []);
 };
 
-export const useRunGame = () => {
+export const useRunGame = (
+  hasGameStarted: boolean,
+  isGamePaused: boolean,
+  setIsGameOver: (isGameOver: boolean) => void
+) => {
   const [snakePosition, setSnakePosition] = useState<SnakePositionType>([
     SNAKE_STARTING_POSITION,
   ]);
@@ -80,7 +84,18 @@ export const useRunGame = () => {
   useArrowKeys();
 
   useEffect(() => {
+    if (hasGameStarted) {
+      setSnakePosition([SNAKE_STARTING_POSITION]);
+      setFoodPosition(getRandomFoodPosition(snakePosition));
+    }
+  }, [hasGameStarted]);
+
+  useEffect(() => {
     const interval = setInterval(() => {
+      if (!hasGameStarted || isGamePaused) {
+        return;
+      }
+
       const [snakeHeadPosition] = snakePosition;
 
       const nextSnakeHeadPosition = {
@@ -89,8 +104,8 @@ export const useRunGame = () => {
       };
 
       if (isGameOver(nextSnakeHeadPosition, snakePosition)) {
-        clearInterval(interval);
-        return alert("Game over");
+        setIsGameOver(true);
+        return clearInterval(interval);
       }
 
       if (
@@ -115,7 +130,7 @@ export const useRunGame = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [snakePosition]);
+  }, [snakePosition, hasGameStarted, isGamePaused]);
 
   return { snakePosition, foodPosition };
 };

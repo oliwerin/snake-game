@@ -1,12 +1,27 @@
+import cx from "classnames";
 import { useRunGame } from "./hooks";
 
 import "./Game.css";
 
-function Game() {
-  const { snakePosition, foodPosition } = useRunGame();
+type Props = {
+  hasGameStarted: boolean;
+  isGamePaused: boolean;
+  setIsGameOver: (isGameOver: boolean) => void;
+};
+
+function Game({ hasGameStarted, isGamePaused, setIsGameOver }: Props) {
+  const { snakePosition, foodPosition } = useRunGame(
+    hasGameStarted,
+    isGamePaused,
+    setIsGameOver
+  );
 
   return (
-    <div className="gameArea">
+    <div
+      className={cx("gameArea", {
+        ["gameStopped"]: !hasGameStarted || isGamePaused,
+      })}
+    >
       {snakePosition.map(({ x, y }) => (
         <div
           style={{
