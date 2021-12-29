@@ -1,0 +1,21 @@
+.gameArea {
+  position: relative;
+  margin: auto;
+  width: 20rem;
+  height: 20rem;
+  outline: 1px solid var(--secondary-color);
+}
+
+.snakeSegment {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background: var(--secondary-color);
+}
+
+.snakeFood {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background: var(--tertiary-color);
+}
