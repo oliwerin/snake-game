@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Game } from "./components";
+import { Button, Game } from "./components";
 
 import "./App.css";
 
@@ -8,6 +8,7 @@ function App() {
   const [hasGameStarted, setHasGameStarted] = useState(false);
   const [isGamePaused, setIsGamePaused] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     if (isGameOver) {
@@ -19,47 +20,38 @@ function App() {
 
   return (
     <div>
-      {hasGameStarted && !isGamePaused && (
-        <button
-          type="button"
-          onClick={() => {
-            setIsGamePaused(true);
-          }}
-        >
-          Pause
-        </button>
-      )}
+      <div className="header">
+        <span>Score: {score}</span>
+        {!hasGameStarted && (
+          <Button
+            label="PLAY"
+            onClick={() => {
+              setHasGameStarted(true);
+              setScore(0);
+            }}
+          />
+        )}
+        {hasGameStarted && (
+          <Button
+            label={isGamePaused ? "RESUME" : "PAUSE"}
+            onClick={() => {
+              setIsGamePaused(!isGamePaused);
+            }}
+          />
+        )}
+      </div>
       <div className="gameContainer">
         {(!hasGameStarted || isGamePaused || isGameOver) && (
-          <div className="overlay">
-            {!hasGameStarted && (
-              <button
-                type="button"
-                onClick={() => {
-                  setHasGameStarted(true);
-                }}
-              >
-                Play
-              </button>
-            )}
-            {isGamePaused && (
-              <button
-                type="button"
-                onClick={() => {
-                  setIsGamePaused(false);
-                }}
-              >
-                Resume
-              </button>
-            )}
-          </div>
+          <div className="overlay" />
         )}
         <Game
           hasGameStarted={hasGameStarted}
           isGamePaused={isGamePaused}
           setIsGameOver={setIsGameOver}
+          setScore={setScore}
         />
       </div>
+      <div className="footer">Controls: ←, ↑, →, ↓ </div>
     </div>
   );
 }

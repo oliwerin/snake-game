@@ -71,7 +71,8 @@ const useArrowKeys = () => {
 export const useRunGame = (
   hasGameStarted: boolean,
   isGamePaused: boolean,
-  setIsGameOver: (isGameOver: boolean) => void
+  setIsGameOver: (isGameOver: boolean) => void,
+  setScore: (score: number) => void
 ) => {
   const [snakePosition, setSnakePosition] = useState<SnakePositionType>([
     SNAKE_STARTING_POSITION,
@@ -113,8 +114,8 @@ export const useRunGame = (
         nextSnakeHeadPosition.y === foodPosition.y
       ) {
         setSnakePosition([nextSnakeHeadPosition, ...snakePosition]);
-
         setFoodPosition(getRandomFoodPosition(snakePosition));
+        setScore(snakePosition.length);
       } else {
         setSnakePosition([
           nextSnakeHeadPosition,

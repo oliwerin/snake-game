@@ -2,23 +2,31 @@
   position: relative;
   height: 100%;
   width: 100%;
-  outline: 1px solid var(--secondary-color);
+  outline: 1px solid var(--color-orange);
+
+  background: var(--color-gray);
+  background: radial-gradient(
+    circle,
+    var(--color-gray) 0%,
+    var(--color-orange) 35%,
+    var(--color-navy) 100%
+  );
 }
 
 .gameStopped {
   filter: blur(4px);
 }
 
-.snakeSegment {
-  position: absolute;
-  width: 1rem;
-  height: 1rem;
-  background: var(--secondary-color);
-}
-
 .snakeFood {
   position: absolute;
   width: 1rem;
   height: 1rem;
-  background: var(--tertiary-color);
+  background: var(--color-gray);
+}
+
+.boardSegment {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background: var(--color-black);
 }

@@ -1,0 +1,21 @@
+.button {
+  min-width: 120px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 24px;
+  background: var(--color-gray);
+  background: linear-gradient(
+    90deg,
+    var(--color-gray) 0%,
+    var(--color-orange) 50%
+  );
+  box-shadow: 0px 0px 8px 1px var(--color-navy);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.button:hover,
+.button:focus {
+  box-shadow: 0px 0px 8px 1px var(--color-orange);
+}

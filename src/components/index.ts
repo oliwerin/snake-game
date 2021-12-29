@@ -1,3 +1,4 @@
+import Button from "./Button/Button";
 import Game from "./Game/Game";
 
-export { Game };
+export { Button, Game };
