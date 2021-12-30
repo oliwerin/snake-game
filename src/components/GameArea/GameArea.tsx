@@ -5,6 +5,7 @@ import { PointType, SnakePositionType } from "../../types/types";
 import { GAME_AREA_SIZE } from "../../constants/constants";
 
 import "./GameArea.css";
+import { doesSnakePositionContainPoint } from "../../utils/utils";
 
 type Props = {
   isGameStopped: boolean;
@@ -23,9 +24,7 @@ function GameArea({ isGameStopped, snakePosition, foodPosition }: Props) {
       {[...Array(GAME_AREA_SIZE).keys()].map((_, x) => (
         <Fragment key={`id-${x}`}>
           {[...Array(GAME_AREA_SIZE).keys()].map((_, y) =>
-            snakePosition.find(
-              (position) => position.x === x && position.y === y
-            ) === undefined ? (
+            !doesSnakePositionContainPoint(snakePosition, { x, y }) ? (
               <div
                 key={`id-${x}-${y}`}
                 style={{
