@@ -9,12 +9,16 @@
   box-sizing: border-box;
 }
 
+body,
 html {
+  /* To prevent the "elastic bounce" effect on Safari */
+  position: fixed;
+  overflow: hidden;
   height: 100%;
+  width: 100%;
 }
 
 body {
-  height: 100%;
   margin: 0;
   background: var(--color-black);
   color: var(--color-gray);

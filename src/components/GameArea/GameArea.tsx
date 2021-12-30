@@ -19,6 +19,7 @@ function GameArea({ isGameStopped, snakePosition, foodPosition }: Props) {
         ["gameStopped"]: isGameStopped,
       })}
     >
+      {/* Todo: optimise the number of rendered elements */}
       {[...Array(GAME_AREA_SIZE).keys()].map((_, x) => (
         <Fragment key={`id-${x}`}>
           {[...Array(GAME_AREA_SIZE).keys()].map((_, y) =>
