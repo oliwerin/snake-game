@@ -1,57 +1,42 @@
-import { useEffect, useState } from "react";
-
-import { Button, Game } from "./components";
+import { Controls, GameArea } from "./components";
+import { useRunGame } from "./hooks/hooks";
 
 import "./App.css";
 
 function App() {
-  const [hasGameStarted, setHasGameStarted] = useState(false);
-  const [isGamePaused, setIsGamePaused] = useState(false);
-  const [isGameOver, setIsGameOver] = useState(false);
-  const [score, setScore] = useState(0);
-
-  useEffect(() => {
-    if (isGameOver) {
-      setHasGameStarted(false);
-      setIsGamePaused(false);
-      setIsGameOver(false);
-    }
-  }, [isGameOver]);
+  const {
+    hasGameStarted,
+    isGamePaused,
+    isGameStopped,
+    snakePosition,
+    foodPosition,
+    swipeHandlers,
+    setHasGameStarted,
+    setIsGamePaused,
+  } = useRunGame();
 
   return (
-    <div>
+    <div {...swipeHandlers}>
       <div className="header">
-        <span>Score: {score}</span>
-        {!hasGameStarted && (
-          <Button
-            label="PLAY"
-            onClick={() => {
-              setHasGameStarted(true);
-              setScore(0);
-            }}
-          />
-        )}
-        {hasGameStarted && (
-          <Button
-            label={isGamePaused ? "RESUME" : "PAUSE"}
-            onClick={() => {
-              setIsGamePaused(!isGamePaused);
-            }}
-          />
-        )}
-      </div>
-      <div className="gameContainer">
-        {(!hasGameStarted || isGamePaused || isGameOver) && (
-          <div className="overlay" />
-        )}
-        <Game
+        <span>Score: {snakePosition.length - 1}</span>
+        <Controls
           hasGameStarted={hasGameStarted}
           isGamePaused={isGamePaused}
-          setIsGameOver={setIsGameOver}
-          setScore={setScore}
+          setHasGameStarted={setHasGameStarted}
+          setIsGamePaused={setIsGamePaused}
         />
       </div>
-      <div className="footer">Controls: ←, ↑, →, ↓ </div>
+      <div className="gameContainer">
+        {isGameStopped && <div className="overlay" />}
+        <GameArea
+          isGameStopped={isGameStopped}
+          snakePosition={snakePosition}
+          foodPosition={foodPosition}
+        />
+      </div>
+      <div className="footer">
+        Controls: use ←, ↑, →, ↓ buttons or swipe gestures to control the snake
+      </div>
     </div>
   );
 }

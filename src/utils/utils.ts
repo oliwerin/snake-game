@@ -1,11 +1,7 @@
-import { GAME_AREA_SIZE } from "../../constants/constants";
-import {
-  PointType,
-  SnakeDirection,
-  SnakePositionType,
-} from "../../types/types";
+import { GAME_AREA_SIZE } from "../constants/constants";
+import { PointType, SnakeDirection, SnakePositionType } from "../types/types";
 
-export const getUpdatedXHeadCoordinate = (
+export const getNextSnakeHeadXCoordinate = (
   x: number,
   snakeDirection: SnakeDirection
 ) => {
@@ -20,7 +16,7 @@ export const getUpdatedXHeadCoordinate = (
   return x;
 };
 
-export const getUpdatedYHeadCoordinate = (
+export const getNextSnakeHeadYCoordinate = (
   y: number,
   snakeDirection: SnakeDirection
 ) => {
@@ -81,3 +77,13 @@ export const isGameOver = (
 
   return didSnakeHitItself || didSnakeHitGameAreaBorder;
 };
+
+export const getNextSnakePosition = (
+  nextSnakeHeadPosition: PointType,
+  snakePosition: SnakePositionType
+) => [
+  nextSnakeHeadPosition,
+  ...snakePosition
+    .filter((_position, index) => index !== 0)
+    .map((_position, index) => snakePosition[index]),
+];

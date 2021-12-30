@@ -1,4 +1,5 @@
 import Button from "./Button/Button";
-import Game from "./Game/Game";
+import Controls from "./Controls/Controls";
+import GameArea from "./GameArea/GameArea";
 
-export { Button, Game };
+export { Button, Controls, GameArea };
