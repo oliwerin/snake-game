@@ -1,5 +1,5 @@
 import { GAME_AREA_SIZE } from "../constants/constants";
-import { PointType, SnakeDirection, SnakePositionType } from "../types/types";
+import { Point, SnakeDirection, SnakePosition } from "../types/types";
 
 export const getNextSnakeHeadXCoordinate = (
   x: number,
@@ -32,8 +32,8 @@ export const getNextSnakeHeadYCoordinate = (
 };
 
 export const doesSnakePositionContainPoint = (
-  snakePosition: SnakePositionType,
-  point: PointType
+  snakePosition: SnakePosition,
+  point: Point
 ) =>
   snakePosition.find(
     (position) => position.x === point.x && position.y === point.y
@@ -41,7 +41,7 @@ export const doesSnakePositionContainPoint = (
 
 const getRandomInt = () => Math.floor(Math.random() * (GAME_AREA_SIZE - 1));
 
-export const getRandomFoodPosition = (snakePosition: SnakePositionType) => {
+export const getRandomFoodPosition = (snakePosition: SnakePosition) => {
   let x: number;
   let y: number;
 
@@ -54,8 +54,8 @@ export const getRandomFoodPosition = (snakePosition: SnakePositionType) => {
 };
 
 export const isGameOver = (
-  nextSnakeHeadPosition: PointType,
-  snakePosition: SnakePositionType
+  nextSnakeHeadPosition: Point,
+  snakePosition: SnakePosition
 ) => {
   const didSnakeHitItself = doesSnakePositionContainPoint(
     snakePosition,
@@ -72,8 +72,8 @@ export const isGameOver = (
 };
 
 export const getNextSnakePosition = (
-  nextSnakeHeadPosition: PointType,
-  snakePosition: SnakePositionType
+  nextSnakeHeadPosition: Point,
+  snakePosition: SnakePosition
 ) => [
   nextSnakeHeadPosition,
   ...snakePosition

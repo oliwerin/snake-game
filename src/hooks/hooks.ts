@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
-import { PointType, SnakeDirection, SnakePositionType } from "../types/types";
+import { Point, SnakeDirection, SnakePosition } from "../types/types";
 
 import {
   REFRESH_RATE_MS,
@@ -81,11 +81,11 @@ export const useRunGame = () => {
   const [isGamePaused, setIsGamePaused] = useState(false);
   const isGameStopped = !hasGameStarted || isGamePaused;
 
-  const [snakePosition, setSnakePosition] = useState<SnakePositionType>([
+  const [snakePosition, setSnakePosition] = useState<SnakePosition>([
     SNAKE_STARTING_POSITION,
   ]);
 
-  const [foodPosition, setFoodPosition] = useState<PointType | null>(null);
+  const [foodPosition, setFoodPosition] = useState<Point | null>(null);
 
   useKeyboard();
 

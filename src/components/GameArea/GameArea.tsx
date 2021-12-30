@@ -1,16 +1,16 @@
 import { Fragment } from "react";
 import cx from "classnames";
 
-import { PointType, SnakePositionType } from "../../types/types";
+import { Point, SnakePosition } from "../../types/types";
 import { GAME_AREA_SIZE } from "../../constants/constants";
+import { doesSnakePositionContainPoint } from "../../utils/utils";
 
 import "./GameArea.css";
-import { doesSnakePositionContainPoint } from "../../utils/utils";
 
 type Props = {
   isGameStopped: boolean;
-  snakePosition: SnakePositionType;
-  foodPosition: PointType | null;
+  snakePosition: SnakePosition;
+  foodPosition: Point | null;
 };
 
 function GameArea({ isGameStopped, snakePosition, foodPosition }: Props) {

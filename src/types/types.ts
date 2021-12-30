@@ -1,9 +1,9 @@
-export type PointType = {
+export type Point = {
   x: number;
   y: number;
 };
 
-export type SnakePositionType = PointType[];
+export type SnakePosition = Point[];
 
 export enum SnakeDirection {
   Up = "up",
